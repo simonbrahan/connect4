@@ -17,3 +17,18 @@
     height: 108px;
     width: 108px;
 }
+
+.counter {
+    width: 100px;
+    height: 100px;
+    margin: 4px;
+    border-radius: 50%;
+}
+
+.counter-red {
+    background: linear-gradient(45deg, #ff0000 0%, #ff6600 100%);
+}
+
+.counter-yellow {
+    background: linear-gradient(45deg, #ffff00 0%, #ff6600 100%);
+}
