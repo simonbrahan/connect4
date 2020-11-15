@@ -12,7 +12,7 @@ class Square extends React.Component {
             );
         }
 
-        return (<div className="square" />);
+        return (<div className="square" onClick={ this.props.handleClick } />);
     }
 }
 
@@ -29,11 +29,17 @@ class Board extends React.Component {
         }
     }
 
+    handleClick(idx) {
+        const squares = this.state.squares.slice();
+        squares[idx] = "red";
+        this.setState({ squares: squares });
+    }
+
     square(idx) {
         if (this.state.squares[idx]) {
             return (<Square withCounter={ this.state.squares[idx] } />);
         } else {
-            return (<Square />);
+            return (<Square handleClick={ () => this.handleClick(idx) } />);
         }
     }
 
