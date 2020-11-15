@@ -29,24 +29,24 @@ class Board extends React.Component {
         }
     }
 
-    square(counter) {
-        if (counter) {
-            return (<Square withCounter={counter} />);
+    square(idx) {
+        if (this.state.squares[idx]) {
+            return (<Square withCounter={ this.state.squares[idx] } />);
         } else {
             return (<Square />);
         }
     }
 
-    row(counters) {
+    row(startIdx) {
         return (
             <div className="board-row">
-                { this.square(counters[0]) }
-                { this.square(counters[1]) }
-                { this.square(counters[2]) }
-                { this.square(counters[3]) }
-                { this.square(counters[4]) }
-                { this.square(counters[5]) }
-                { this.square(counters[6]) }
+                { this.square(startIdx) }
+                { this.square(startIdx + 1) }
+                { this.square(startIdx + 2) }
+                { this.square(startIdx + 3) }
+                { this.square(startIdx + 4) }
+                { this.square(startIdx + 5) }
+                { this.square(startIdx + 6) }
             </div>
         );
     }
@@ -54,12 +54,12 @@ class Board extends React.Component {
     render() {
         return (
             <div className="board">
-                {this.row(this.state.squares.slice(0, 7))}
-                {this.row(this.state.squares.slice(8, 14))}
-                {this.row(this.state.squares.slice(15, 21))}
-                {this.row(this.state.squares.slice(22, 28))}
-                {this.row(this.state.squares.slice(29, 35))}
-                {this.row(this.state.squares.slice(36, 42))}
+                { this.row(0) }
+                { this.row(8) }
+                { this.row(15) }
+                { this.row(22) }
+                { this.row(29) }
+                { this.row(36) }
             </div>
         );
     }
