@@ -55,11 +55,11 @@ class Board extends React.Component {
         return (
             <div className="board">
                 { this.row(0) }
-                { this.row(8) }
-                { this.row(15) }
-                { this.row(22) }
-                { this.row(29) }
-                { this.row(36) }
+                { this.row(7) }
+                { this.row(14) }
+                { this.row(21) }
+                { this.row(28) }
+                { this.row(35) }
             </div>
         );
     }
