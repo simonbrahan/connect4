@@ -1,0 +1,19 @@
+.board {
+    margin: 150px auto 0px;
+    width: 770px;
+    height: 660px;
+}
+
+.board-row:after {
+    clear: both;
+    content: "";
+    display: table;
+}
+
+.square {
+    background: #eee;
+    border: 1px solid #ccc;
+    float: left;
+    height: 108px;
+    width: 108px;
+}
