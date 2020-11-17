@@ -43,6 +43,10 @@ class Board extends React.Component {
     }
 
     handleClick(idx) {
+        if (this.state.winner) {
+            return;
+        }
+
         const player = this.state.player;
         const nextPlayer = player === "red" ? "yellow" : "red";
 
@@ -82,24 +86,35 @@ class Board extends React.Component {
         );
     }
 
-    render() {
+    gameStatus() {
         if (this.state.winner) {
             return (
-                <div className="winner">
-                    <p>{this.state.winner} won!</p>
+                <div className="status">
+                    <p>{ this.state.winner } won!</p>
                     <button onClick={ () => this.handleReset() }>Play Again</button>
                 </div>
             );
+        } else {
+            return (
+                <div className="status">
+                    <p>{ this.state.player }'s turn</p>
+                </div>
+            );
         }
+    }
 
+    render() {
         return (
-            <div className="board">
-                { this.row(0) }
-                { this.row(7) }
-                { this.row(14) }
-                { this.row(21) }
-                { this.row(28) }
-                { this.row(35) }
+            <div className="game">
+                <div className="board">
+                    { this.row(0) }
+                    { this.row(7) }
+                    { this.row(14) }
+                    { this.row(21) }
+                    { this.row(28) }
+                    { this.row(35) }
+                </div>
+                { this.gameStatus() }
             </div>
         );
     }

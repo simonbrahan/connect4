@@ -1,7 +1,11 @@
-.board {
-    margin: 150px auto 0px;
+body {
+    font-family: sans-serif;
+    font-size: 1.2em;
+}
+
+.game {
+    margin: 70px auto 0px;
     width: 770px;
-    height: 660px;
 }
 
 .board-row:after {
