@@ -37,7 +37,8 @@ class Board extends React.Component {
 
         this.state = {
             squares: Array(42).fill(null),
-            player: "red"
+            player: "red",
+            winner: null
         };
     }
 
@@ -48,13 +49,15 @@ class Board extends React.Component {
         const squares = this.state.squares.slice();
         squares[idx] = player;
 
-        const winningPlayer = checkForWin(squares);
+        this.setState({ squares: squares, player: nextPlayer, winner: checkForWin(squares) });
+    }
 
-        if (winningPlayer) {
-            window.alert(winningPlayer + " won!");
-        }
-
-        this.setState({ squares: squares, player: nextPlayer });
+    handleReset() {
+        this.setState({
+            squares: Array(42).fill(null),
+            player: "red",
+            winner: null
+        });
     }
 
     square(idx) {
@@ -80,6 +83,15 @@ class Board extends React.Component {
     }
 
     render() {
+        if (this.state.winner) {
+            return (
+                <div className="winner">
+                    <p>{this.state.winner} won!</p>
+                    <button onClick={ () => this.handleReset() }>Play Again</button>
+                </div>
+            );
+        }
+
         return (
             <div className="board">
                 { this.row(0) }
