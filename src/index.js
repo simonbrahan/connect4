@@ -2,6 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+const wins = [
+    [0, 7, 14, 21], [0, 8, 16, 24], [0, 1, 2, 3], [1, 8, 15, 22], [1, 9, 17, 25], [1, 2, 3, 4],
+    [2, 9, 16, 23], [2, 10, 18, 26], [2, 3, 4, 5], [3, 9, 15, 21], [3, 10, 17, 24], [3, 11, 19, 27],
+    [3, 4, 5, 6], [4, 10, 16, 22], [4, 11, 18, 25], [5, 11, 17, 23], [5, 12, 19, 26], [6, 12, 18, 24],
+    [6, 13, 20, 27], [7, 14, 21, 28], [7, 15, 23, 31], [7, 8, 9, 10], [8, 15, 22, 29], [8, 16, 24, 32],
+    [8, 9, 10, 11], [9, 16, 23, 30], [9, 17, 25, 33], [9, 10, 11, 12], [10, 16, 22, 28], [10, 17, 24, 31],
+    [10, 18, 26, 34], [10, 11, 12, 13], [11, 17, 23, 29], [11, 18, 25, 32], [12, 18, 24, 30], [12, 19, 26, 33],
+    [13, 19, 25, 31], [13, 20, 27, 34], [14, 21, 28, 35], [14, 22, 30, 38], [14, 15, 16, 17], [15, 22, 29, 36],
+    [15, 23, 31, 39], [15, 16, 17, 18], [16, 23, 30, 37], [16, 24, 32, 40], [16, 17, 18, 19], [17, 23, 29, 35],
+    [17, 24, 31, 38], [17, 25, 33, 41], [17, 18, 19, 20], [18, 24, 30, 36], [18, 25, 32, 39], [19, 25, 31, 37],
+    [19, 26, 33, 40], [20, 26, 32, 38], [20, 27, 34, 41], [21, 22, 23, 24], [22, 23, 24, 25], [23, 24, 25, 26],
+    [24, 25, 26, 27], [28, 29, 30, 31], [29, 30, 31, 32], [30, 31, 32, 33], [31, 32, 33, 34], [35, 36, 37, 38],
+    [36, 37, 38, 39], [37, 38, 39, 40], [38, 39, 40, 41]
+]
+
 class Square extends React.Component {
     render() {
         if (this.props.withCounter) {
@@ -32,6 +47,12 @@ class Board extends React.Component {
 
         const squares = this.state.squares.slice();
         squares[idx] = player;
+
+        const winningPlayer = checkForWin(squares);
+
+        if (winningPlayer) {
+            window.alert(winningPlayer + " won!");
+        }
 
         this.setState({ squares: squares, player: nextPlayer });
     }
@@ -70,6 +91,23 @@ class Board extends React.Component {
             </div>
         );
     }
+}
+
+function checkForWin(squares) {
+    for (const line of wins) {
+        if(!squares[line[0]]) {
+            continue;
+        }
+
+        if (squares[line[0]] === squares[line[1]] &&
+            squares[line[1]] === squares[line[2]] &&
+            squares[line[2]] === squares[line[3]]
+        ) {
+            return squares[line[0]];
+        }
+    }
+
+    return null;
 }
 
 ReactDOM.render(<Board />, document.getElementById('root'));
