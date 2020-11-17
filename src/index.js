@@ -21,14 +21,19 @@ class Board extends React.Component {
         super(props);
 
         this.state = {
-            squares: Array(42).fill(null)
+            squares: Array(42).fill(null),
+            player: "red"
         };
     }
 
     handleClick(idx) {
+        const player = this.state.player;
+        const nextPlayer = player === "red" ? "yellow" : "red";
+
         const squares = this.state.squares.slice();
-        squares[idx] = "red";
-        this.setState({ squares: squares });
+        squares[idx] = player;
+
+        this.setState({ squares: squares, player: nextPlayer });
     }
 
     square(idx) {
