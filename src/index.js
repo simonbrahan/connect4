@@ -21,12 +21,8 @@ class Board extends React.Component {
         super(props);
 
         this.state = {
-            squares: [
-                "red", null, "yellow", null, null, null, null, null, null, null, null, null, null, null,
-                null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-                null, null, null, null, null, null, null, null, null, null, null, null, null, null
-            ]
-        }
+            squares: Array(42).fill(null)
+        };
     }
 
     handleClick(idx) {
