@@ -48,11 +48,15 @@ class Board extends React.Component {
             return;
         }
 
+        if (!columnHasSquares(this.state.squares, idx)) {
+            return;
+        }
+
         const player = this.state.player;
         const nextPlayer = player === "red" ? "yellow" : "red";
 
         const squares = this.state.squares.slice();
-        squares[idx] = player;
+        squares[getTopOfColumn(squares, idx)] = player;
 
         this.setState({
             squares: squares,
@@ -155,6 +159,21 @@ function checkForWin(squares) {
 
 function checkForDraw(squares) {
    return !squares.includes(null);
+}
+
+function columnHasSquares(squares, idx) {
+    const topSquare = idx % 7;
+    return squares[topSquare] === null;
+}
+
+function getTopOfColumn(squares, idx) {
+    let bottomSquare = idx % 7 + 35;
+
+    while (bottomSquare >= 0 && squares[bottomSquare] !== null) {
+        bottomSquare -= 7;
+    }
+
+    return bottomSquare;
 }
 
 ReactDOM.render(<Board />, document.getElementById('root'));
